@@ -74,4 +74,7 @@ body{
 
 .cart{
     margin-left: 20px;
+    border-radius: 12px;
+    background: #FFF;
+    padding: 10px;
 }

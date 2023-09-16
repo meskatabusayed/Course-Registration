@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-key */
 import { useEffect, useState } from 'react';
 import './Home.css'
-import {FaBookmark} from 'react-icons/fa';
+import {FaBookmark , FaDollarSign} from 'react-icons/fa';
 import Cart from '../Cart/Cart';
+import { toast } from 'react-toastify';
 
 const Home = () => {
 
@@ -24,7 +25,10 @@ const Home = () => {
         let count = course.Credit;
 
         if(isExist){
-           return alert('Already Booked');
+           return toast.error('Already Exist', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 3000, // Close after 3 seconds
+          });
         }
         else{
 
@@ -35,12 +39,18 @@ const Home = () => {
             const totalRemaining = 20 - count;
             
             if(count > 20){
-                return alert('Credit end');
+                return toast.error('Credit limit over', {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 3000, // Close after 3 seconds
+                  });
             }
             else{
                 setCreditTotal(count);
                 if(totalRemaining < 0){
-                    return alert('less zero');
+                    return toast.error('Less Zero', {
+                        position: toast.POSITION.TOP_CENTER,
+                        autoClose: 3000, // Close after 3 seconds
+                      });
                 }
             setRemaining(totalRemaining);
 
@@ -72,8 +82,8 @@ const Home = () => {
                     <h3 className='card-title'>{course.title}</h3>
                     <p className='card-desc'>{course.description}</p>
                     <div className="info">
-                        <p>$ Price : {course.Price}</p>
-                        <p><FaBookmark  className='icon' ></FaBookmark> Credit : {course.Credit} hr</p>
+                        <p><FaDollarSign ></FaDollarSign> Price : {course.Price}</p>
+                        <p><FaBookmark ></FaBookmark> Credit : {course.Credit} hr</p>
                     </div>
                     <button onClick={() => handleSelectCourse(course)} className='card-btn'>Select</button>
                 </div>
